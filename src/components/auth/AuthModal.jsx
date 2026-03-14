@@ -1,16 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { X, Smartphone, ArrowRight, Hexagon } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
-import { auth, db, isFirebaseConfigured, githubProvider } from '../../firebase';
+import { auth, db, isFirebaseConfigured, githubProvider, googleProvider } from '../../firebase';
 import { useToast } from '../layout/ToastContainer';
 import './AuthModal.css';
 
 import {
-  GoogleAuthProvider,
-  GithubAuthProvider,
   signInWithPopup,
   RecaptchaVerifier,
   signInWithPhoneNumber,
+  GithubAuthProvider,
 } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 
@@ -59,8 +58,9 @@ export function AuthModal({ isOpen, onClose, onLogin }) {
     setLoading(true);
     try {
       if (isFirebaseConfigured) {
-        const provider = new GoogleAuthProvider();
-        const result   = await signInWithPopup(auth, provider);
+        console.log("Starting Google SignInPopup with provider: ", googleProvider);
+        const result   = await signInWithPopup(auth, googleProvider);
+        console.log("Google Login SUCCESS: ", result.user?.email);
         const user     = result.user;
         // Step 1: Check Firestore for existing profile
         const userRef = doc(db, "users", user.uid);
@@ -91,8 +91,13 @@ export function AuthModal({ isOpen, onClose, onLogin }) {
       }
       onClose();
     } catch (err) {
-      console.error('Google login error:', err);
-      toast.error('Google login failed: ' + (err.code || 'Please try again.'));
+      console.error('❌ Google login error:', err);
+      let message = 'Google login failed. ';
+      if (err.code === 'auth/popup-closed-by-user') message += 'The popup was closed.';
+      else if (err.code === 'auth/popup-blocked') message += 'The popup was blocked by your browser.';
+      else if (err.code === 'auth/network-request-failed') message += 'Network connection lost.';
+      else message += (err.code || 'Please try again.');
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -101,29 +106,23 @@ export function AuthModal({ isOpen, onClose, onLogin }) {
   // ── GITHUB SIGN-IN ───────────────────────────────────────────────────────
   const handleGithubLogin = async () => {
     setLoading(true);
+    console.log("🚀 Starting GitHub Authentication...");
     try {
       if (isFirebaseConfigured) {
         const result = await signInWithPopup(auth, githubProvider);
         const user = result.user;
+        console.log("✅ GitHub SUCCESS:", user.email);
         
-        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
         const credential = GithubAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
 
-        // Step 1: Check Firestore for existing profile
         const userRef = doc(db, "users", user.uid);
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
-          // Returning user
-          onLogin({
-            ...userSnap.data(),
-            method: 'GitHub',
-            githubToken: token
-          });
+          onLogin({ ...userSnap.data(), method: 'GitHub', githubToken: token });
           toast.success(`Welcome back, ${userSnap.data().name}!`);
         } else {
-          // New user -> Trigger Profile Setup
           onLogin({
             name: user.displayName || '',
             email: user.email,
@@ -141,8 +140,12 @@ export function AuthModal({ isOpen, onClose, onLogin }) {
       }
       onClose();
     } catch (err) {
-      console.error('GitHub login error:', err);
-      toast.error('GitHub login failed: ' + (err.code || 'Check your internet connection.'));
+      console.error('❌ GitHub login error:', err);
+      let message = 'GitHub login failed. ';
+      if (err.code === 'auth/popup-closed-by-user') message += 'The popup was closed.';
+      else if (err.code === 'auth/popup-blocked') message += 'The popup was blocked.';
+      else message += (err.code || 'Check your internet connection.');
+      toast.error(message);
     } finally {
       setLoading(false);
     }

@@ -154,7 +154,7 @@ export function Dashboard({ user, onLoginClick }) {
   }
 
   /* ── LOGGED IN → Full Dashboard ── */
-  const displayName = user.name || user.email || 'User';
+  const displayName = user.name || user.email?.split('@')[0] || 'User';
 
   return (
     <div className="dashboard-container">

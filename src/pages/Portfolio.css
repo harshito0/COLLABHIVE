@@ -138,3 +138,31 @@
   transform: translateY(-5px);
   border-color: var(--primary);
 }
+
+/* ── Responsive Styles ── */
+@media (max-width: 768px) {
+  .generation-box {
+    padding: 2rem 1rem;
+  }
+
+  .options-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .option-card {
+    min-width: 0;
+  }
+
+  .url-bar {
+    display: none;
+  }
+
+  .mock-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .frame-content {
+    padding: 1rem;
+  }
+}

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Briefcase, Download, Share2, Layout as LayoutIcon, Code, Eye, Star, Trophy, Clock, CheckCircle } from 'lucide-react';
 import { db, auth } from '../firebase';
 import { collection, query, where, onSnapshot, doc } from 'firebase/firestore';
@@ -10,7 +11,7 @@ export function Portfolio({ user: initialUser }) {
   const [previewReady, setPreviewReady] = useState(false);
 
   // ── FIREBASE LISTENERS ─────────────────────────────────────────────────────
-  React.useEffect(() => {
+  useEffect(() => {
     if (!db || !auth.currentUser) return;
 
     // 1. Listen for User Profile & Stats

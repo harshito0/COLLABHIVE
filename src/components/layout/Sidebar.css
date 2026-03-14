@@ -12,6 +12,7 @@
   border-radius: 0;
   background: rgba(15, 17, 26, 0.85); /* Slightly darker for edge */
   overflow-y: auto;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar::-webkit-scrollbar {
@@ -25,10 +26,14 @@
 .sidebar-header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
   padding: 0 1rem 2rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   margin-bottom: 1.5rem;
+}
+
+.close-sidebar {
+  display: none;
 }
 
 .logo-text {
@@ -195,4 +200,22 @@
 
 .creator-link:hover {
   color: var(--primary);
+}
+
+/* ── Responsive Styles ── */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+    background: #0f111a;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .close-sidebar {
+    display: flex;
+  }
 }

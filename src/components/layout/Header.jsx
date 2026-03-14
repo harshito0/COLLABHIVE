@@ -1,10 +1,13 @@
 import React from 'react';
-import { Bell, Search, MessageSquare } from 'lucide-react';
+import { Bell, Search, MessageSquare, Menu } from 'lucide-react';
 import './Header.css';
 
-export function Header() {
+export function Header({ user, onMenuClick }) {
   return (
     <header className="app-header glass-panel">
+      <button className="menu-toggle icon-btn" onClick={onMenuClick}>
+        <Menu size={24} />
+      </button>
       <div className="header-search">
         <div className="search-bar">
           <Search size={18} className="search-icon text-muted" />

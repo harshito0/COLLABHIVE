@@ -81,6 +81,16 @@
   }
 }
 
+@media (max-width: 768px) {
+  .settings-section {
+    padding: 1.5rem;
+  }
+
+  .settings-container {
+    padding-bottom: 2rem;
+  }
+}
+
 @media (max-width: 640px) {
   .settings-header {
     flex-direction: column;
@@ -91,5 +101,13 @@
   .settings-header .flex-center {
     width: 100%;
     justify-content: space-between;
+  }
+
+  .settings-section {
+    padding: 1.25rem 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
   }
 }

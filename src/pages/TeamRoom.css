@@ -159,8 +159,50 @@
 @media (max-width: 1024px) {
   .team-room-container {
     grid-template-columns: 1fr;
+    height: auto;
+    min-height: calc(100vh - 120px);
   }
-  .team-sidebar, .task-panel {
+  .team-sidebar {
+    display: none; /* hidden by default on tablet */
+  }
+  .task-panel {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .team-room-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .chat-messages {
+    padding: 1rem;
+  }
+
+  .message {
+    max-width: 90%;
+  }
+
+  .message-bubble {
+    font-size: 0.875rem;
+  }
+
+  .chat-input-wrapper {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .team-room-container {
+    padding: 0.75rem;
+  }
+
+  .chat-header {
+    padding: 1rem;
+  }
+
+  .chat-input-area {
+    padding: 1rem;
   }
 }

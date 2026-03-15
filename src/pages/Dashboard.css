@@ -295,7 +295,7 @@
 }
 
 /* ── Responsive Styles ── */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .dashboard-header {
     flex-direction: column;
     align-items: flex-start;
@@ -312,8 +312,67 @@
   .projects-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .heatmap-section {
     padding: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .stat-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .project-card {
+    padding: 1rem;
+  }
+
+  .landing-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .landing-content h1 {
+    font-size: 1.75rem;
+  }
+
+  .landing-sub {
+    font-size: 0.95rem;
+  }
+
+  .landing-cta {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.95rem;
+  }
+
+  .landing-features {
+    flex-direction: column;
+    gap: 1rem;
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
 import { CommandPalette } from './components/layout/CommandPalette';
@@ -64,13 +64,14 @@ function AppLayout({ user, onLoginClick, onLogout, isSidebarOpen, setIsSidebarOp
   );
 }
 
-function App() {
+function AppInner() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isProfileSetupOpen, setIsProfileSetupOpen] = useState(false);
   const [pendingUser, setPendingUser] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
   // ── Auth Listener (Basic Authentication) ──
   useEffect(() => {
@@ -129,6 +130,7 @@ function App() {
     } else {
       setUser(authData);
       setIsAuthOpen(false);
+      navigate('/');
     }
   };
 
@@ -136,6 +138,7 @@ function App() {
     setUser({ ...pendingUser, ...profileData });
     setPendingUser(null);
     setIsProfileSetupOpen(false);
+    navigate('/');
   };
 
   const handleLogout = async () => {
@@ -163,45 +166,51 @@ function App() {
   }
 
   return (
-    <Router>
-      <ToastProvider>
-        <>
-          <AppLayout 
-            user={user} 
-            onLoginClick={openAuth} 
-            onLogout={handleLogout}
-            isSidebarOpen={isSidebarOpen}
-            setIsSidebarOpen={setIsSidebarOpen}
-          >
-            <Routes>
-              <Route path="/" element={<Dashboard user={user} onLoginClick={openAuth} />} />
-              <Route path="/mentor" element={<AIMentor user={user} />} />
-              <Route path="/matchmaking" element={<Matchmaking />} />
-              <Route path="/workspace" element={<Workspace />} />
-              <Route path="/hackathon" element={<Hackathon />} />
-              <Route path="/learning" element={<Placeholder title="Learning Paths" />} />
-              <Route path="/recruiter" element={<RecruiterHub />} />
-              <Route path="/portfolio" element={<Portfolio user={user} />} />
-              <Route path="/settings" element={<ProfileSettings user={user} onLogout={handleLogout} />} />
-              <Route path="/landing" element={<LandingPage />} />
-              <Route path="/team" element={<TeamRoom user={user} />} />
-            </Routes>
-          </AppLayout>
+    <ToastProvider>
+      <>
+        <AppLayout 
+          user={user} 
+          onLoginClick={openAuth} 
+          onLogout={handleLogout}
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        >
+          <Routes>
+            <Route path="/" element={<Dashboard user={user} onLoginClick={openAuth} />} />
+            <Route path="/mentor" element={<AIMentor user={user} />} />
+            <Route path="/matchmaking" element={<Matchmaking />} />
+            <Route path="/workspace" element={<Workspace />} />
+            <Route path="/hackathon" element={<Hackathon />} />
+            <Route path="/learning" element={<Placeholder title="Learning Paths" />} />
+            <Route path="/recruiter" element={<RecruiterHub />} />
+            <Route path="/portfolio" element={<Portfolio user={user} />} />
+            <Route path="/settings" element={<ProfileSettings user={user} onLogout={handleLogout} />} />
+            <Route path="/landing" element={<LandingPage />} />
+            <Route path="/team" element={<TeamRoom user={user} />} />
+          </Routes>
+        </AppLayout>
 
-          <CommandPalette />
-          
-          <AuthModal
-            isOpen={isAuthOpen}
-            onClose={() => setIsAuthOpen(false)}
-            onLogin={handleLogin}
-          />
-          
-          <ProfileSetup
-            isOpen={isProfileSetupOpen}
-            onComplete={handleProfileComplete}
-          />
-        </>
-      </ToastProvider>
+        <CommandPalette />
+        
+        <AuthModal
+          isOpen={isAuthOpen}
+          onClose={() => setIsAuthOpen(false)}
+          onLogin={handleLogin}
+        />
+        
+        <ProfileSetup
+          isOpen={isProfileSetupOpen}
+          onComplete={handleProfileComplete}
+        />
+      </>
+    </ToastProvider>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppInner />
     </Router>
   );
 }

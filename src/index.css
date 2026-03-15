@@ -142,6 +142,60 @@ button {
   justify-content: space-between;
 }
 
+/* Responsive Gap Utilities */
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
+.gap-10 { gap: 2.5rem; }
+.gap-12 { gap: 3rem; }
+
+@media (min-width: 640px) { /* sm */
+  .sm\:gap-1 { gap: 0.25rem; }
+  .sm\:gap-2 { gap: 0.5rem; }
+  .sm\:gap-3 { gap: 0.75rem; }
+  .sm\:gap-4 { gap: 1rem; }
+  .sm\:gap-6 { gap: 1.5rem; }
+  .sm\:gap-8 { gap: 2rem; }
+  .sm\:gap-10 { gap: 2.5rem; }
+  .sm\:gap-12 { gap: 3rem; }
+}
+
+@media (min-width: 768px) { /* md */
+  .md\:gap-1 { gap: 0.25rem; }
+  .md\:gap-2 { gap: 0.5rem; }
+  .md\:gap-3 { gap: 0.75rem; }
+  .md\:gap-4 { gap: 1rem; }
+  .md\:gap-6 { gap: 1.5rem; }
+  .md\:gap-8 { gap: 2rem; }
+  .md\:gap-10 { gap: 2.5rem; }
+  .md\:gap-12 { gap: 3rem; }
+}
+
+@media (min-width: 1024px) { /* lg */
+  .lg\:gap-1 { gap: 0.25rem; }
+  .lg\:gap-2 { gap: 0.5rem; }
+  .lg\:gap-3 { gap: 0.75rem; }
+  .lg\:gap-4 { gap: 1rem; }
+  .lg\:gap-6 { gap: 1.5rem; }
+  .lg\:gap-8 { gap: 2rem; }
+  .lg\:gap-10 { gap: 2.5rem; }
+  .lg\:gap-12 { gap: 3rem; }
+}
+
+@media (min-width: 1280px) { /* xl */
+  .xl\:gap-1 { gap: 0.25rem; }
+  .xl\:gap-2 { gap: 0.5rem; }
+  .xl\:gap-3 { gap: 0.75rem; }
+  .xl\:gap-4 { gap: 1rem; }
+  .xl\:gap-6 { gap: 1.5rem; }
+  .xl\:gap-8 { gap: 2rem; }
+  .xl\:gap-10 { gap: 2.5rem; }
+  .xl\:gap-12 { gap: 3rem; }
+}
+
 /* Layout Grid */
 .app-container {
   display: flex;
@@ -152,7 +206,7 @@ button {
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 280px; /* Width of sidebar */
+  /* Removed fixed margin-left to avoid duplication/allow responsive handling */
   min-height: 100vh;
 }
 

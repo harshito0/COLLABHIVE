@@ -68,6 +68,7 @@ const RECRUITER_FEATURES = [
 /* ═══════ COMPONENT ═══════ */
 export default function LandingPage() {
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = React.useState(false);
   const goApp = () => navigate('/');
 
   return (
@@ -87,7 +88,28 @@ export default function LandingPage() {
             Open App <ArrowRight size={15} style={{ marginLeft: 4 }} />
           </button>
         </div>
+        {/* Mobile Hamburger */}
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label="Toggle menu"
+        >
+          <span className={`hamburger-line ${menuOpen ? 'open' : ''}`} />
+          <span className={`hamburger-line ${menuOpen ? 'open' : ''}`} />
+          <span className={`hamburger-line ${menuOpen ? 'open' : ''}`} />
+        </button>
       </nav>
+      {/* Mobile Nav Dropdown */}
+      {menuOpen && (
+        <div className="mobile-nav-dropdown">
+          <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
+          <a href="#how" onClick={() => setMenuOpen(false)}>How It Works</a>
+          <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
+          <button className="btn-primary w-full flex-center" onClick={() => { setMenuOpen(false); goApp(); }}>
+            Open App <ArrowRight size={15} style={{ marginLeft: 4 }} />
+          </button>
+        </div>
+      )}
 
       {/* ══════════ 1. HERO ══════════ */}
       <section className="hero-section">

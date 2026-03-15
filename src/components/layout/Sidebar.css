@@ -219,3 +219,15 @@
     display: flex;
   }
 }
+
+@media (min-width: 1025px) {
+  .sidebar {
+    transform: translateX(0) !important; /* Ensure sidebar is always visible on desktop */
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 250px; /* Slightly smaller sidebar for smaller mobile devices */
+  }
+}

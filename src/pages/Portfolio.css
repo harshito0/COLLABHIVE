@@ -142,7 +142,7 @@
 /* ── Responsive Styles ── */
 @media (max-width: 768px) {
   .generation-box {
-    padding: 2rem 1rem;
+    padding: 2rem 1.25rem;
   }
 
   .options-grid {
@@ -163,6 +163,27 @@
   }
 
   .frame-content {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .portfolio-container {
+    padding-bottom: 1rem;
+  }
+
+  .generation-box {
+    padding: 1.5rem 1rem;
+  }
+
+  .icon-badge.large {
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+  }
+
+  .frame-content {
     padding: 1rem;
+    min-height: 350px;
   }
 }

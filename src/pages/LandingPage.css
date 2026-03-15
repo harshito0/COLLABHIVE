@@ -551,42 +551,272 @@
   color: var(--text-main);
 }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
+/* ── Mobile Hamburger Menu ── */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-line.open:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger-line.open:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-line.open:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-nav-dropdown {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: rgba(15, 17, 26, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  z-index: 99;
+  animation: slideDown 0.25s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mobile-nav-dropdown a {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+
+.mobile-nav-dropdown a:hover {
+  color: var(--text-main);
+  background: rgba(255,255,255,0.05);
+}
+
+/* ── Section title responsive scale ── */
+.section-title {
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+}
+
+/* ── RESPONSIVE BREAKPOINTS ── */
+
+/* Tablet (≤1024px) */
+@media (max-width: 1024px) {
   .landing-nav {
     padding: 1rem 1.5rem;
   }
+
+  .features-section,
+  .recruiter-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .how-section,
+  .pricing-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bento-card.featured {
+    grid-column: span 2;
+  }
+}
+
+/* Tablet/Mobile (≤768px) */
+@media (max-width: 768px) {
+  .landing-nav {
+    padding: 1rem 1.25rem;
+  }
+
   .landing-nav-links {
     display: none;
   }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .hero-section {
+    padding: 7rem 1.25rem 3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-cta-group .btn-primary,
+  .hero-cta-group .btn-secondary {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .social-proof-grid {
+    gap: 2rem;
+  }
+
+  .proof-stat h3 {
+    font-size: 2rem;
+  }
+
   .bento-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
+
   .bento-card.featured {
     grid-column: span 1;
   }
-  .pricing-grid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
+
+  .bento-card {
+    padding: 1.5rem;
   }
-  .recruiter-card {
-    flex-direction: column;
-    text-align: center;
-  }
-  .recruiter-visual {
-    flex: none;
-    width: 100%;
-    height: 200px;
-  }
+
   .steps-row {
     flex-direction: column;
     align-items: center;
+    gap: 0;
   }
+
+  .step-card {
+    max-width: 100%;
+    width: 100%;
+    padding: 1.75rem 1.25rem;
+  }
+
   .step-arrow {
     transform: rotate(90deg);
+    margin: 0.5rem 0;
+    opacity: 0.5;
   }
+
+  .recruiter-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+  }
+
+  .recruiter-text h2 {
+    font-size: 1.65rem;
+  }
+
+  .recruiter-visual {
+    flex: none;
+    width: 100%;
+    height: 180px;
+  }
+
+  .recruiter-features {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .recruiter-text .btn-primary {
+    width: 100% !important;
+    justify-content: center;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pricing-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .final-cta-content h2 {
+    font-size: 2rem;
+  }
+
   .landing-footer {
     flex-direction: column;
     text-align: center;
+    padding: 2rem 1.25rem;
+  }
+
+  .footer-links {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile (≤640px) */
+@media (max-width: 640px) {
+  .hero-section {
+    padding: 6rem 1rem 2.5rem;
+  }
+
+  .social-proof-grid {
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .features-section,
+  .recruiter-section,
+  .how-section,
+  .pricing-section,
+  .final-cta-section {
+    padding: 3rem 1rem;
+  }
+}
+
+/* Small mobile (≤400px) */
+@media (max-width: 400px) {
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-cta-group .btn-primary,
+  .hero-cta-group .btn-secondary {
+    width: 100%;
+  }
+
+  .social-proof-grid {
+    grid-template-columns: 1fr;
+    max-width: 220px;
   }
 }

@@ -151,6 +151,7 @@
   justify-content: center;
   gap: 2rem;
   margin-top: 2rem;
+  width: 100%;
 }
 
 .action-btn {
@@ -238,11 +239,24 @@
 
 @media (max-width: 400px) {
   .profile-card {
-    padding: 1.25rem 1rem;
+    padding: 1.25rem 0.875rem;
+  }
+
+  .action-buttons {
+    gap: 2rem;
   }
 
   .action-btn {
-    width: 54px;
-    height: 54px;
+    width: 56px;
+    height: 56px;
+  }
+  
+  .profile-image-container {
+    width: 90px;
+    height: 90px;
+  }
+
+  .profile-info h2 {
+    font-size: 1.25rem;
   }
 }

@@ -67,12 +67,13 @@ export function AuthModal({ isOpen, onClose, onLogin }) {
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
-          // Returning user
+          console.log("✅ Google Returning User:", user.email);
           onLogin({
             ...userSnap.data(),
-            method: 'Google'
+            method: 'Google',
+            isNewUser: false
           });
-          toast.success(`Welcome back, ${userSnap.data().name}!`);
+          toast.success(`Welcome back, ${userSnap.data().name || 'Developer'}!`);
         } else {
           // New user -> Trigger Profile Setup
           onLogin({
@@ -85,9 +86,8 @@ export function AuthModal({ isOpen, onClose, onLogin }) {
           });
         }
       } else {
-        // Demo fallback
         await new Promise(r => setTimeout(r, 900));
-        onLogin({ name: 'Google User', email: 'demo@gmail.com', method: 'Google' });
+        onLogin({ name: 'Google User', email: 'demo@gmail.com', method: 'Google', isNewUser: false });
       }
       onClose();
     } catch (err) {

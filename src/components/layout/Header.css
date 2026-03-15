@@ -102,3 +102,77 @@
 .icon-btn .badge.warning {
   background: var(--warning);
 }
+/* ── Responsive Header ── */
+@media (max-width: 1024px) {
+  .app-header {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+    margin-right: 1rem;
+  }
+  
+  .header-search {
+    max-width: none;
+  }
+
+  .header-actions {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    height: 70px;
+    padding: 0 1rem;
+  }
+
+  .header-search {
+    margin: 0 0.5rem;
+  }
+
+  .search-bar {
+    padding: 0.4rem 0.75rem;
+  }
+
+  .search-input {
+    font-size: 0.85rem;
+  }
+
+  .header-actions {
+    gap: 0.5rem;
+  }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .btn-primary span {
+    display: none; /* Hide "+ New Project" text on small mobile */
+  }
+
+  .btn-primary {
+    padding: 0.5rem !important;
+    min-width: 36px;
+  }
+  
+  .btn-primary::before {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-search {
+    display: none; /* Hide search bar on very small phones from header to save space */
+  }
+  
+  .app-header {
+    justify-content: space-between;
+  }
+}
